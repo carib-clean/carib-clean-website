@@ -1660,7 +1660,9 @@ function animateCounter(el) {
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const href = a.getAttribute('href');
-    if(!href || href === '#') return;
+    if(!href || href === '#' || href === '') return;
+const target = document.getElementById(href.substring(1));
+if(target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth', block:'start'}); const offset = target.getBoundingClientRect().top + window.scrollY - 70; window.scrollTo({top: offset, behavior:'smooth'}); return; }
     const t = document.querySelector(href);
     if(t) {
       e.preventDefault();
